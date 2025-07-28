@@ -1,29 +1,54 @@
-import { db } from './firebase-config.js';
-import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-const container = document.getElementById('lista-imoveis');
-container.innerHTML = "";
+// Config Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyCyuPy8CMUu7haCa-7t-aFGyQfETJ689us",
+  authDomain: "tmdj-imoveis.firebaseapp.com",
+  projectId: "tmdj-imoveis",
+  storageBucket: "tmdj-imoveis.appspot.com",
+  messagingSenderId: "88800336166",
+  appId: "1:88800336166:web:7564d2cf329f3e375649e7",
+  measurementId: "G-M6S28BXP0X"
+};
 
-const q = query(collection(db, "imoveis"), orderBy("criadoEm", "desc"));
-const snap = await getDocs(q);
+// Inicializa
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-if (snap.empty) {
-  container.innerHTML = "<p>Nenhum imóvel cadastrado ainda.</p>";
+async function carregarImoveis() {
+  const container = document.querySelector(".imoveis");
+  container.innerHTML = "<p>Carregando imóveis...</p>";
+
+  try {
+    const snapshot = await getDocs(collection(db, "imoveis"));
+    if (snapshot.empty) {
+      container.innerHTML = "<p>Nenhum imóvel cadastrado ainda.</p>";
+      return;
+    }
+
+    let html = "<h2>Imóveis à Venda</h2><div class='imoveis-grid'>";
+    snapshot.forEach(doc => {
+      const imovel = doc.data();
+      html += `
+        <div class="card">
+          <img src="${imovel.foto}" alt="Foto do imóvel" />
+          <h3>${imovel.titulo} | ${imovel.bairro}</h3>
+          <p class="preco">${imovel.preco}</p>
+          <p class="tipo">${imovel.tipo}</p>
+        </div>
+      `;
+    });
+    html += "</div>";
+    container.innerHTML = html;
+  } catch (e) {
+    container.innerHTML = "<p>Erro ao carregar imóveis.</p>";
+    console.error(e);
+  }
 }
 
-snap.forEach(doc => {
-  const { titulo, bairro, preco, tipo, imageUrl } = doc.data();
-
-  const card = document.createElement("div");
-  card.className = "card";
-  card.innerHTML = `
-    <img src="${imageUrl}" alt="${titulo}">
-    <div class="card-body">
-      <h3>${titulo}</h3>
-      <p><strong>Bairro:</strong> ${bairro}</p>
-      <p><strong>Tipo:</strong> ${tipo}</p>
-      <p><strong>Preço:</strong> ${preco}</p>
-    </div>
-  `;
-  container.appendChild(card);
-});
+document.addEventListener("DOMContentLoaded", carregarImoveis);
