@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f7f1e9;
+    color: #333;
+}
+
+header {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+.hero {
+    background: url('hero.jpg') no-repeat center center/cover;
+    color: #fff;
+    text-align: center;
+    padding: 120px 20px;
+}
+
+.hero .btn {
+    background-color: #333;
+    color: #fff;
+    padding: 12px 24px;
+    text-decoration: none;
+    margin-top: 20px;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.listings {
+    padding: 40px;
+}
+
+.listings h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.filters select,
+.filters button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card h4 {
+    font-size: 20px;
+    margin: 10px 0 5px;
+}
+
+.card p {
+    font-size: 18px;
+    margin: 0;
+}
+
+.card .btn {
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.why {
+    background-color: #f2ebdf;
+    padding: 40px;
+    text-align: center;
+}
+
+.why h3 {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.features div {
+    max-width: 300px;
+    text-align: left;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
