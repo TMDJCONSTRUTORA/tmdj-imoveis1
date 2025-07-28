@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalhes do Imóvel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>TMDJ Imóveis</h1>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="quem-somos.html">Quem Somos</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+  </header>
+
+  <main class="detalhes-container">
+    <h2 id="titulo">Carregando...</h2>
+    <img id="foto" src="" alt="Imagem do imóvel" style="max-width: 100%; height: auto;" />
+    <p><strong>Bairro:</strong> <span id="bairro"></span></p>
+    <p><strong>Tipo:</strong> <span id="tipo"></span></p>
+    <p><strong>Preço:</strong> <span id="preco"></span></p>
+    <a href="index.html">← Voltar</a>
+  </main>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
+
+  <!-- Firebase config e script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCyuPy8CMUu7haCa-7t-aFGyQfETJ689us",
+      authDomain: "tmdj-imoveis.firebaseapp.com",
+      projectId: "tmdj-imoveis",
+      storageBucket: "tmdj-imoveis.appspot.com",
+      messagingSenderId: "88800336166",
+      appId: "1:88800336166:web:7564d2cf329f3e375649e7",
+      measurementId: "G-M6S28BXP0X"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (id) {
+      const docRef = doc(db, "imoveis", id);
+      getDoc(docRef).then((docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          document.getElementById("titulo").textContent = data.titulo;
+          document.getElementById("bairro").textContent = data.bairro;
+          document.getElementById("tipo").textContent = data.tipo;
+          document.getElementById("preco").textContent = data.preco;
+          document.getElementById("foto").src = data.foto;
+        } else {
+          document.querySelector("main").innerHTML = "<p>Imóvel não encontrado.</p>";
+        }
+      });
+    } else {
+      document.querySelector("main").innerHTML = "<p>ID inválido.</p>";
+    }
+  </script>
+</body>
+</html>
