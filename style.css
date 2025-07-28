@@ -1,156 +1,97 @@
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f7f1e9;
-    color: #333;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
 }
 
 header {
-    background-color: #fff;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 40px;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-header h1 {
-    font-size: 24px;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
 }
 
 nav a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #333;
+  color: #fff;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .hero {
-    background: url('hero.jpg') no-repeat center center/cover;
-    color: #fff;
-    text-align: center;
-    padding: 120px 20px;
+  position: relative;
+  text-align: center;
 }
 
-.hero .btn {
-    background-color: #333;
-    color: #fff;
-    padding: 12px 24px;
-    text-decoration: none;
-    margin-top: 20px;
-    display: inline-block;
-    border-radius: 4px;
+.banner-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
 }
 
-.listings {
-    padding: 40px;
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
 }
 
-.listings h3 {
-    font-size: 28px;
-    margin-bottom: 20px;
+.botao {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #222;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
 }
 
-.filters {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
-}
-
-.filters select,
-.filters button {
-    padding: 10px;
-    font-size: 16px;
-}
-
-.cards {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+.imoveis {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 40px;
 }
 
 .card {
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    width: 300px;
-    text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
-.card h4 {
-    font-size: 20px;
-    margin: 10px 0 5px;
-}
-
-.card p {
-    font-size: 18px;
-    margin: 0;
-}
-
-.card .btn {
-    background-color: #333;
-    color: #fff;
-    text-decoration: none;
-    display: inline-block;
-    padding: 10px;
-    margin: 15px 0;
-    border-radius: 4px;
-}
-
-.why {
-    background-color: #f2ebdf;
-    padding: 40px;
-    text-align: center;
-}
-
-.why h3 {
-    font-size: 28px;
-    margin-bottom: 30px;
-}
-
-.features {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.features div {
-    max-width: 300px;
-    text-align: left;
+.card-body {
+  padding: 15px;
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
 }
 
 .whatsapp {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    width: 56px;
-    height: 56px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
 }
 
 .whatsapp img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+  width: 56px;
+  height: 56px;
 }
-
-<a href="https://wa.me/5511989027982?text=Olá!%20Gostaria%20de%20falar%20com%20a%20TMDJ%20Imóveis" 
-   class="whatsapp" target="_blank" title="Fale conosco no WhatsApp">
-   <img src="https://cdn.jsdelivr.net/gh/rafaelbotazini/whatsapp-icon/whatsapp-icon.png" alt="WhatsApp" width="56" height="56">
-</a>
