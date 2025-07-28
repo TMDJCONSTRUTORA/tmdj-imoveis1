@@ -95,3 +95,7 @@ footer {
   width: 56px;
   height: 56px;
 }
+
+html {
+  scroll-behavior: smooth;
+}
