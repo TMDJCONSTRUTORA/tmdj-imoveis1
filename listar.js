@@ -1,19 +1,5 @@
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCyUp8VGCMU7haCa-7t-aFGyQETj689us",
-  authDomain: "tmdj-imoveis.firebaseapp.com",
-  projectId: "tmdj-imoveis",
-  storageBucket: "tmdj-imoveis.appspot.com",
-  messagingSenderId: "8880033166",
-  appId: "1:8880033166:web:7564d2cf329f3e375649e7",
-  measurementId: "G-M6S28BXPQX"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+import { db } from "./firebase-config.js";
 
 async function carregarImoveis() {
   const lista = document.querySelector("#lista-imoveis");
