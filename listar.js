@@ -15,7 +15,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 async function carregarImoveis() {
-  const lista = document.querySelector(".grid-imoveis");
+  const lista = document.querySelector("#lista-imoveis");
   lista.innerHTML = "";
 
   const querySnapshot = await getDocs(collection(db, "imoveis"));
