@@ -21,7 +21,7 @@ async function carregarImoveis() {
     `;
 
     card.addEventListener("click", () => {
-      window.location.href = `detalhe.html?id=${doc.id}`;
+      window.location.href = \`detalhe.html?id=${doc.id}\`;
     });
 
     lista.appendChild(card);

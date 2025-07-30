@@ -1,4 +1,3 @@
-
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
@@ -12,7 +11,6 @@ const firebaseConfig = {
   measurementId: "G-M6S28BXPQX"
 };
 
-// ✅ Só inicializa se ainda não foi inicializado
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const db = getFirestore(app);
 
