@@ -23,12 +23,14 @@ async function carregarImoveis() {
     const imovel = doc.data();
     const card = document.createElement("div");
     card.className = "card";
+
     card.innerHTML = `
       <img src="${imovel.foto}" alt="${imovel.titulo}" />
       <h3>${imovel.titulo}</h3>
       <p><strong>Bairro:</strong> ${imovel.bairro}</p>
       <p><strong>Preço:</strong> ${imovel.preco}</p>
     `;
+
     lista.appendChild(card);
   });
 }
