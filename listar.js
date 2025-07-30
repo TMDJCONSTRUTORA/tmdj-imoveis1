@@ -11,6 +11,7 @@ async function carregarImoveis() {
   querySnapshot.forEach((doc) => {
     const imovel = doc.data();
     const id = doc.id;
+
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
