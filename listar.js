@@ -2,7 +2,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebas
 import {
   getFirestore,
   collection,
-  getDocs
+  getDocs,
+  doc,
+  getDoc
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -20,35 +22,68 @@ const db = getFirestore(app);
 
 async function carregarImoveis() {
   const lista = document.getElementById("lista-imoveis");
+  const detalhes = document.getElementById("detalhe-imovel");
   lista.innerHTML = "";
+  detalhes.style.display = "none";
 
   const querySnapshot = await getDocs(collection(db, "imoveis"));
-  querySnapshot.forEach((doc) => {
-    const dados = doc.data();
+  querySnapshot.forEach((docSnap) => {
+    const dados = docSnap.data();
     const card = document.createElement("div");
     card.className = "imovel";
 
     card.innerHTML = `
-      <a href="detalhe-imovel.html?id=${doc.id}">
-        <img src="${dados.foto}" alt="${dados.titulo}" />
-      </a>
+      <img src="${dados.foto}" alt="${dados.titulo}" style="cursor: pointer;" />
       <h3>${dados.titulo} - ${dados.bairro}</h3>
       <p><strong>${dados.preco}</strong></p>
       <p>${dados.descricaoCurta || ""}</p>
-      <a href="detalhe-imovel.html?id=${doc.id}" class="botao">Ver mais</a>
+      <button class="botao" data-id="${docSnap.id}">Ver mais</button>
     `;
 
-    // Forçar abertura em nova aba
-    const links = card.querySelectorAll('a');
-    links.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.open(link.href, '_blank');
-      });
+    card.querySelector("button").addEventListener("click", () => {
+      mostrarDetalhes(docSnap.id);
     });
 
     lista.appendChild(card);
   });
 }
+
+async function mostrarDetalhes(id) {
+  const lista = document.getElementById("lista-imoveis");
+  const detalhes = document.getElementById("detalhe-imovel");
+
+  const docRef = doc(db, "imoveis", id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    const data = docSnap.data();
+    detalhes.innerHTML = `
+      <h2>${data.titulo}</h2>
+      <p><strong>Bairro:</strong> ${data.bairro}</p>
+      <p><strong>Tipo:</strong> ${data.tipo}</p>
+      <p><strong>Preço:</strong> ${data.preco}</p>
+      <p><strong>Descrição:</strong> ${data.descricaoCompleta || ""}</p>
+      <div class="galeria">
+        ${
+          Array.isArray(data.fotos)
+            ? data.fotos.map(url => `<img src="${url}" style="max-width: 100%; margin-bottom: 10px;" />`).join("")
+            : data.foto ? `<img src="${data.foto}" style="max-width: 100%;" />` : ""
+        }
+      </div>
+      <br>
+      <button onclick="voltarParaLista()">← Voltar para lista</button>
+    `;
+    lista.style.display = "none";
+    detalhes.style.display = "block";
+    window.scrollTo(0, 0);
+  } else {
+    alert("Imóvel não encontrado.");
+  }
+}
+
+window.voltarParaLista = function () {
+  document.getElementById("detalhe-imovel").style.display = "none";
+  document.getElementById("lista-imoveis").style.display = "grid";
+};
 
 carregarImoveis();
