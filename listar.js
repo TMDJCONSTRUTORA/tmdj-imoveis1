@@ -29,14 +29,23 @@ async function carregarImoveis() {
     card.className = "imovel";
 
     card.innerHTML = `
-      <a href="detalhe-imovel.html?id=${doc.id}" target="_blank">
+      <a href="detalhe-imovel.html?id=${doc.id}">
         <img src="${dados.foto}" alt="${dados.titulo}" />
       </a>
       <h3>${dados.titulo} - ${dados.bairro}</h3>
       <p><strong>${dados.preco}</strong></p>
       <p>${dados.descricaoCurta || ""}</p>
-      <a href="detalhe-imovel.html?id=${doc.id}" class="botao" target="_blank">Ver mais</a>
+      <a href="detalhe-imovel.html?id=${doc.id}" class="botao">Ver mais</a>
     `;
+
+    // Forçar abertura em nova aba
+    const links = card.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.open(link.href, '_blank');
+      });
+    });
 
     lista.appendChild(card);
   });
