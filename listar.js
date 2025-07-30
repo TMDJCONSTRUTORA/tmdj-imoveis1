@@ -30,10 +30,10 @@ async function carregarImoveis() {
   querySnapshot.forEach((docSnap) => {
     const dados = docSnap.data();
     const card = document.createElement("div");
-    card.className = "imovel";
+    card.className = "imovel-card";
 
     card.innerHTML = `
-      <img src="${dados.foto}" alt="${dados.titulo}" style="cursor: pointer;" />
+      <img src="${dados.foto}" alt="${dados.titulo}" class="imovel-card-img" />
       <h3>${dados.titulo} - ${dados.bairro}</h3>
       <p><strong>${dados.preco}</strong></p>
       <p>${dados.descricaoCurta || ""}</p>
