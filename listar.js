@@ -5,7 +5,6 @@ import {
   getDocs
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-// Config Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCyuPy8CMUu7haCa-7t-aFGyQfETJ689us",
   authDomain: "tmdj-imoveis.firebaseapp.com",
@@ -16,39 +15,31 @@ const firebaseConfig = {
   measurementId: "G-M6S28BXP0X"
 };
 
-// Inicializa
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 async function carregarImoveis() {
-  const container = document.querySelector(".imoveis");
-  container.innerHTML = "<p>Carregando imóveis...</p>";
+  const lista = document.getElementById("lista-imoveis");
+  lista.innerHTML = "";
 
-  try {
-    const snapshot = await getDocs(collection(db, "imoveis"));
-    if (snapshot.empty) {
-      container.innerHTML = "<p>Nenhum imóvel cadastrado ainda.</p>";
-      return;
-    }
+  const querySnapshot = await getDocs(collection(db, "imoveis"));
+  querySnapshot.forEach((doc) => {
+    const dados = doc.data();
+    const card = document.createElement("div");
+    card.className = "imovel";
 
-    let html = "<h2>Imóveis à Venda</h2><div class='imoveis-grid'>";
-    snapshot.forEach(doc => {
-      const imovel = doc.data();
-      html += `
-        <div class="card">
-          <img src="${imovel.foto}" alt="Foto do imóvel" />
-          <h3>${imovel.titulo} | ${imovel.bairro}</h3>
-          <p class="preco">${imovel.preco}</p>
-          <p class="tipo">${imovel.tipo}</p>
-        </div>
-      `;
-    });
-    html += "</div>";
-    container.innerHTML = html;
-  } catch (e) {
-    container.innerHTML = "<p>Erro ao carregar imóveis.</p>";
-    console.error(e);
-  }
+    card.innerHTML = `
+      <a href="detalhe-imovel.html?id=${doc.id}" target="_blank">
+        <img src="${dados.foto}" alt="${dados.titulo}" />
+      </a>
+      <h3>${dados.titulo} - ${dados.bairro}</h3>
+      <p><strong>${dados.preco}</strong></p>
+      <p>${dados.descricaoCurta || ""}</p>
+      <a href="detalhe-imovel.html?id=${doc.id}" class="botao" target="_blank">Ver mais</a>
+    `;
+
+    lista.appendChild(card);
+  });
 }
 
-document.addEventListener("DOMContentLoaded", carregarImoveis);
+carregarImoveis();
