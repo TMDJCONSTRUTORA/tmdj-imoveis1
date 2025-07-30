@@ -16,7 +16,7 @@ async function carregarDetalhe() {
   if (docSnap.exists()) {
     const imovel = docSnap.data();
     container.innerHTML = `
-      <img src="${imovel.foto}" alt="${imovel.titulo}" class="detalhe-imagem">
+      <img src="${imovel.foto}" alt="${imovel.titulo}">
       <h2>${imovel.titulo}</h2>
       <p><strong>Bairro:</strong> ${imovel.bairro}</p>
       <p><strong>Preço:</strong> ${imovel.preco}</p>
