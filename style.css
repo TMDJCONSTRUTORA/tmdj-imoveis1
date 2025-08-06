@@ -1,19 +1,18 @@
-
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
-  background: #f2f2f2;
+  margin: 0;
+  background: #f4f4f4;
 }
 
 header, footer {
   background: #333;
   color: #fff;
-  padding: 10px 20px;
   text-align: center;
+  padding: 15px;
 }
 
 nav a {
-  color: #fff;
+  color: white;
   margin: 0 10px;
   text-decoration: none;
   font-weight: bold;
@@ -22,7 +21,6 @@ nav a {
 .hero {
   position: relative;
   text-align: center;
-  color: white;
 }
 
 .banner-img {
@@ -36,40 +34,52 @@ nav a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: white;
 }
 
 .botao {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #333;
+  background: #000;
   color: white;
   text-decoration: none;
   margin-top: 10px;
+  border-radius: 5px;
 }
 
 .grid-imoveis {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 20px;
+  justify-content: center;
   padding: 20px;
 }
 
 .card {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   width: 300px;
-  padding: 10px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #ccc;
+  overflow: hidden;
   text-align: center;
+  transition: transform 0.3s;
   cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.03);
 }
 
 .card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 8px;
+}
+
+.card h3, .card p {
+  padding: 10px;
+  margin: 0;
 }
 
 .detalhe-container {
@@ -81,11 +91,13 @@ nav a {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.detalhe-container img {
-  max-width: 100%;
+.detalhe-imagem {
+  width: 100%;
+  max-width: 600px;
   height: auto;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  display: block;
+  margin: 20px auto;
+  border-radius: 12px;
 }
 
 .detalhe-container h2 {
@@ -102,4 +114,5 @@ nav a {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  z-index: 1000;
 }
