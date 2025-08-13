@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <h1>Painel Administrativo</h1>
+  <form id="form-imovel">
+    <input type="text" id="titulo" placeholder="Título do imóvel" required><br>
+    <input type="text" id="cidade" placeholder="Cidade" required><br>
+    <input type="number" id="preco" placeholder="Preço" required><br>
+    <textarea id="descricao" placeholder="Descrição" required></textarea><br>
+    <label>Imagem de capa:</label>
+    <input type="file" id="capa" accept="image/*" required><br>
+    <label>Galeria de fotos (até 15):</label>
+    <input type="file" id="galeria" accept="image/*" multiple><br>
+    <button type="submit">Cadastrar Imóvel</button>
+  </form>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="painel.js"></script>
+</body>
+</html>
