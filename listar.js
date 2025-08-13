@@ -1,35 +1,28 @@
-<<<<<<< HEAD
-// placeholder listar.js
-=======
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-import { db } from "./firebase-config.js";
+// listar.js
+import { db } from './firebase.js';
+import { collection, getDocs, orderBy, query } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
-async function carregarImoveis() {
-  const lista = document.querySelector("#lista-imoveis");
-  lista.innerHTML = "";
+async function listarImoveis() {
+    const lista = document.getElementById('lista-imoveis');
+    const q = query(collection(db, 'imoveis'));
+    const snapshot = await getDocs(q);
 
-  const querySnapshot = await getDocs(collection(db, "imoveis"));
-  querySnapshot.forEach((doc) => {
-    const imovel = doc.data();
-    const card = document.createElement("div");
-    card.className = "card";
+    lista.innerHTML = ''; // limpa a lista antes de adicionar
 
-    card.innerHTML = `
-      <img src="${imovel.foto}" alt="${imovel.titulo}" class="card-img"/>
-      <div class="card-info">
-        <h3>${imovel.titulo}</h3>
-        <p><strong>Bairro:</strong> ${imovel.bairro}</p>
-        <p><strong>Preço:</strong> ${imovel.preco}</p>
-      </div>
-    `;
+    snapshot.forEach(doc => {
+        const imovel = doc.data();
+        const card = document.createElement('div');
+        card.classList.add('card-imovel');
 
-    card.addEventListener("click", () => {
-      window.location.href = \`detalhe.html?id=${doc.id}\`;
+        card.innerHTML = `
+            <img src="${imovel.capa}" alt="${imovel.titulo}" class="img-card">
+            <h3>${imovel.titulo}</h3>
+            <p>${imovel.cidade}</p>
+            <p>R$ ${imovel.preco.toLocaleString()}</p>
+        `;
+
+        lista.appendChild(card);
     });
-
-    lista.appendChild(card);
-  });
 }
 
-carregarImoveis();
->>>>>>> 40d93b71ba54c8a56ac43e91f0b4ac72c7882908
+listarImoveis();
