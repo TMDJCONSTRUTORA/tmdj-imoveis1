@@ -1,1 +1,33 @@
-<!-- Painel administrativo -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin - TMDJ Imóveis</title>
+</head>
+<body>
+  <h1>Painel de Cadastro de Imóveis</h1>
+
+  <form id="form-imovel">
+    <label>Título:</label>
+    <input type="text" id="titulo" required>
+    
+    <label>Preço:</label>
+    <input type="number" id="preco" required>
+    
+    <label>Cidade:</label>
+    <input type="text" id="cidade" required>
+    
+    <label>Imagem de Capa:</label>
+    <input type="file" id="capa" accept="image/*" required>
+    
+    <label>Galeria (10-15 fotos):</label>
+    <input type="file" id="galeria" accept="image/*" multiple>
+    
+    <button type="submit">Cadastrar Imóvel</button>
+  </form>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="painel.js"></script>
+</body>
+</html>
